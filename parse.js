@@ -1,11 +1,13 @@
-let command = "/var/lib/pufferpanel/binaries/depotdownloader/DepotDownloader -username USERNAME -remember-password -password PASSWORD"
+let command = "/var/lib/pufferpanel/binaries/depotdownloader/DepotDownloader -username CHANGEME -remember-password"
 let modsIds = []
 document.querySelectorAll('a').forEach(link => {
     const url = new URL(link.href);
     const id = url.searchParams.get('id');
     modsIds.push(id);
 });
+let commands = ""
 modsIds.forEach(id => {
-    command += ` +workshop_download_item 221100 ${id}`
+    commands += command + ` -app 221100 -pubfile ${id} && `
 })
-console.log(command)
+commands += `echo "all done"`
+console.log(commands)
